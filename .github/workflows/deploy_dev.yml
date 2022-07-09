@@ -1,7 +1,7 @@
 - name: Create Zip File
   uses: montudor/action-zip@v1
   with:
-      args: zip -r ./test.zip ./test
+    args: zip -r ./test.zip ./test
 
 - name: Push Zip to S3
   uses: jakejarvis/s3-sync-action@master
