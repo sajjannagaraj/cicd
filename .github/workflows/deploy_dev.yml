@@ -14,13 +14,13 @@ jobs:
       - name: Create Zip File
         uses: montudor/action-zip@v1
         with:
-          args: zip -r ./myfolder/test.zip . -i ./test
+          args: zip -r ./myfolder/test.zip . ./test
 
 
       - name: Push Zip to S3
         uses: jakejarvis/s3-sync-action@master
         env:
-          SOURCE_DIR: './artifacts'
+          SOURCE_DIR: './scripts'
           AWS_REGION: 'us-west-2'
           AWS_S3_BUCKET: 'mytest-bucket7'
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
