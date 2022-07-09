@@ -14,7 +14,7 @@ jobs:
       - name: Create Zip File
         uses: montudor/action-zip@v1
         with:
-          args: zip -r ./artifacts/${{ github.repository }}/${{ github.sha }}.zip ./src
+          args: zip -r ./artifacts/${{ github.repository }}/test.zip test
 
 
       - name: Push Zip to S3
