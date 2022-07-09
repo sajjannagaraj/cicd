@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - name: Make artifact directory
-          run: mkdir -p ./artifacts/${{ github.repository }}
+        run: mkdir -p ./artifacts/${{ github.repository }}
 
       - name: Create Zip File
         uses: montudor/action-zip@v1
