@@ -9,12 +9,12 @@ jobs:
 
     steps:
       - name: Make artifact directory
-        run: mkdir -p ./artifacts/${{ github.repository }}
+        run: mkdir -p ./myfolder
 
       - name: Create Zip File
         uses: montudor/action-zip@v1
         with:
-          args: zip -r ./artifacts/${{ github.repository }}/${{ github.sha }}.zip /test
+          args: zip -r ./myfolder/test.zip ./test
 
 
       - name: Push Zip to S3
