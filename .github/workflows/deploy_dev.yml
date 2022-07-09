@@ -5,7 +5,7 @@
 
 - name: Push Zip to S3
   uses: jakejarvis/s3-sync-action@master
-    env:
+  env:
     SOURCE_DIR: './scripts'
     AWS_REGION: 'us-west-2'
     AWS_S3_BUCKET: 'mytest-bucket7'
