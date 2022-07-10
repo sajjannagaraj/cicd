@@ -23,4 +23,5 @@ Resources:
         ZipFile: |
           def my_handler(event, context):
             message = 'Hello Lambda World!'
+            print("Modified to the code")
             return message
