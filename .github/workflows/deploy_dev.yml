@@ -1,4 +1,4 @@
-name: CICD
+name: Deploy to Dev
 on:
   push:
     branches: [dev]
@@ -8,19 +8,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Make artifact directory
-        run: mkdir -p ./myfolder
-
-      - name: Create Zip File
-        uses: montudor/action-zip@v1
+      - uses: actions/checkout@v2
+      - name: configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          args: zip -r ./myfolder/test.zip ./cicd
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2
+      - name: listing all the files
+        run: ls -ltr
 
+      - name: Copy cloudformation template to s3
+        run: >
+          aws s3 cp ./cloudformation/.
+          s3://mytest-bucket7/scripts/  --recursive
 
-      - name: Push Zip to S3
-        uses: jakejarvis/s3-sync-action@master
-        env:
-          AWS_REGION: 'us-west-2'
-          AWS_S3_BUCKET: 'mytest-bucket7'
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Deploy to AWS Cloudformation
+        uses: aws-action/aws-cloudformation-github-deploy@v1
+        with:
+          name: cicd-test
+          template: "https://mytest-bucket7.s3.us-west-2.amazonaws.com/scripts/cicd.yml"
+          no-fail-on-empty-changeset: "1"
+          capabilities: "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND"
+
