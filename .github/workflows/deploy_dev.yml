@@ -27,7 +27,7 @@ jobs:
         uses: aws-action/aws-cloudformation-github-deploy@v1
         with:
           name: cicd-test
-          template: "https://mytest-bucket7.s3.us-west-2.amazonaws.com/scripts/cicd.yml"
+          template: "https://mytest-bucket7.s3.us-east-2.amazonaws.com/scripts/cicd.yml"
           no-fail-on-empty-changeset: "1"
           capabilities: "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND"
 
