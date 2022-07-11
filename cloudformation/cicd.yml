@@ -15,7 +15,7 @@ Resources:
   HelloLambdaFunction:
     Type: AWS::Lambda::Function
     Properties:
-      FunctionName: HelloLambdaFunction
+      FunctionName: HelloLambdaFunction1
       Role: !GetAtt HelloLambdaRole.Arn
       Runtime: python3.7
       Handler: index.my_handler
